@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/Libreria.Documentacion/" />
+  <Folder Name="/Libreria.Documentacion/">
+    <File Path="Libreria.Documentacion/umlLibreria.asta" />
+  </Folder>
   <Project Path="Librearia.LogicaNegocio/Librearia.LogicaNegocio.csproj" />
   <Project Path="Libreria.Infraestructura/Libreria.Infraestructura.csproj" />
   <Project Path="Libreria.LogicaAplicacion/Libreria.LogicaAplicacion.csproj" />
