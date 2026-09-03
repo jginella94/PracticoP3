@@ -1,4 +1,4 @@
-﻿using Libreria.Infraestructura.AccesoDatos.Memoria;
+﻿using Libreria.Infraestructura.AccesoDatos.EF;
 using Libreria.LogicaNegocio.Entidades;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
