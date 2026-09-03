@@ -10,6 +10,7 @@ namespace Libreria.WebApp.Controllers
         private ListarTodosLosUsuarios _getall = new ListarTodosLosUsuarios();
         private AltaUsuario _add = new AltaUsuario();
         private BorrarUsuario _borrar = new BorrarUsuario();
+        private VerUsuario _ver = new VerUsuario();
 
 
         public IActionResult Index()
@@ -43,15 +44,46 @@ namespace Libreria.WebApp.Controllers
         {
             try
             {
-                _borrar.Ejecutar(id);
-                return RedirectToAction("index");
-
+                var usuario = _ver.Ejecutar(id);
+                if (usuario == null)
+                    return RedirectToAction("Index");
+                return View(usuario);
             }
             catch (Exception)
             {
-                return RedirectToAction("index");
+                return RedirectToAction("Index");
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _borrar.Ejecutar(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+
+        public ActionResult Details(int id)
+        {
+            try
+            {
+                var usuario = _ver.Ejecutar(id);
+                return View(usuario);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
 
     }
 }

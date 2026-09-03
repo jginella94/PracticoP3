@@ -1,0 +1,24 @@
+@model Libreria.LogicaNegocio.Entidades.Usuario
+
+<h2>Detalle de usuario</h2>
+
+<div>
+    <dl>
+        <dt>Id</dt>
+        <dd>@Model.Id</dd>
+
+        <dt>Nombre</dt>
+        <dd>@Model.Nombre</dd>
+
+        <dt>Mail</dt>
+        <dd>@Model.Mail</dd>
+
+        <dt>Rol</dt>
+        <dd>@Model.Rol</dd>
+
+        <dt>Teléfono</dt>
+        <dd>@Model.Telefono</dd>
+    </dl>
+</div>
+
+<a asp-action="Index">Volver</a>
