@@ -1,7 +1,4 @@
 ﻿using Libreria.LogicaNegocio.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Libreria.Infraestructura.AccesoDatos.Memoria
 {

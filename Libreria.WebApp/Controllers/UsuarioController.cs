@@ -9,6 +9,7 @@ namespace Libreria.WebApp.Controllers
     {
         private ListarTodosLosUsuarios _getall = new ListarTodosLosUsuarios();
         private AltaUsuario _add = new AltaUsuario();
+        private BorrarUsuario _borrar = new BorrarUsuario();
 
 
         public IActionResult Index()
@@ -34,6 +35,21 @@ namespace Libreria.WebApp.Controllers
 
                 ViewBag.Mensaje = e.Message;
                 return View(vMUsuario);
+            }
+        }
+
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _borrar.Ejecutar(id);
+                return RedirectToAction("index");
+
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("index");
             }
         }
 

@@ -1,11 +1,10 @@
-﻿using Libreria.Infraestructura.AccesoDatos.Memoria;
+﻿using Libreria.Infraestructura.AccesoDatos.EF;
 using Libreria.LogicaNegocio.Entidades;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
 {
     public class AltaUsuario
     {
-        // esto esta acplcado. El cu sabe como se hace rl repositorio
         private RepositorioUsuario _repo = new RepositorioUsuario();
 
         public void Ejecutar(Usuario usuario)
