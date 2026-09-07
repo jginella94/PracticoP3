@@ -1,6 +1,5 @@
 ﻿
 using Libreria.LogicaNegocio.Entidades;
-using System.Linq.Expressions;
 
 namespace Libreria.Infraestructura.AccesoDatos.EF
 {
@@ -33,14 +32,24 @@ namespace Libreria.Infraestructura.AccesoDatos.EF
             _context.SaveChanges();
         }
 
-        public Usuario GetById(int id) 
+        public Usuario GetById(int id)
         {
             Usuario usuario = _context.Usuarios.Find(id);
-            if (usuario == null) {
+            if (usuario == null)
+            {
                 throw new Exception($"No se encontro el usuario {id}");
             }
             return usuario;
         }
+
+        public void Update(int id, Usuario usuario)
+        {
+            Usuario unUsuario = GetById(id);
+            unUsuario.Modificar(usuario);
+            _context.Usuarios.Update(unUsuario);
+            _context.SaveChanges();
+        }
+
 
     }
 }

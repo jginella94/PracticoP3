@@ -11,7 +11,7 @@ namespace Libreria.WebApp.Controllers
         private AltaUsuario _add = new AltaUsuario();
         private BorrarUsuario _borrar = new BorrarUsuario();
         private VerUsuario _ver = new VerUsuario();
-
+        private EditarUsuario _editar = new EditarUsuario();
 
         public IActionResult Index()
         {
@@ -33,7 +33,6 @@ namespace Libreria.WebApp.Controllers
             }
             catch (Exception e)
             {
-
                 ViewBag.Mensaje = e.Message;
                 return View(vMUsuario);
             }
@@ -46,7 +45,9 @@ namespace Libreria.WebApp.Controllers
             {
                 var usuario = _ver.Ejecutar(id);
                 if (usuario == null)
+                {
                     return RedirectToAction("Index");
+                }
                 return View(usuario);
             }
             catch (Exception)
@@ -84,6 +85,41 @@ namespace Libreria.WebApp.Controllers
             }
         }
 
+
+        public IActionResult Edit(int id)
+        {
+            Usuario usuario = _ver.Ejecutar(id);
+            if (usuario == null)
+            {
+                return RedirectToAction("index");
+            }
+            return View(new VMUsuario()
+            {
+                Nombre = usuario.Nombre,
+                Mail = usuario.Mail,
+                Rol = usuario.Rol,
+                Telefono = usuario.Telefono
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, VMUsuario vMUsuario)
+        {
+
+            try
+            {
+                _editar.Ejecutar(id, new Usuario(vMUsuario.Nombre, vMUsuario.Mail, vMUsuario.Rol, vMUsuario.Telefono));
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+
+                ViewBag.Mensaje = e.Message;
+                return View(vMUsuario);
+            }
+        }
 
     }
 }
