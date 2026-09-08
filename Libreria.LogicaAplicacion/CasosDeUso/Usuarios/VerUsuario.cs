@@ -1,11 +1,17 @@
-﻿using Libreria.Infraestructura.AccesoDatos.EF;
+﻿using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
+using Librearia.LogicaNegocio.InterfacesRepositorio;
 using Libreria.LogicaNegocio.Entidades;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
 {
-    public class VerUsuario
+    public class VerUsuario : IVer<Usuario>
     {
-        private RepositorioUsuario _repo = new RepositorioUsuario();
+        private IRepositorioUsuario _repo;
+
+        public VerUsuario(IRepositorioUsuario repo)
+        {
+            _repo = repo;
+        }
 
         public Usuario Ejecutar(int id)
         {
