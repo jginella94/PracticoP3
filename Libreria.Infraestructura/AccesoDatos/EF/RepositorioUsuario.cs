@@ -1,12 +1,19 @@
 ﻿
+using Librearia.LogicaNegocio.InterfacesRepositorio;
 using Libreria.LogicaNegocio.Entidades;
 
 namespace Libreria.Infraestructura.AccesoDatos.EF
 {
-    public class RepositorioUsuario
+    public class RepositorioUsuario : IRepositorioUsuario
     {
 
-        private LibreriaContext _context = new LibreriaContext();
+        private LibreriaContext _context;
+
+        public RepositorioUsuario(LibreriaContext context)
+        {
+            _context = context;
+        }
+
 
         public void Add(Usuario usuario)
         {
