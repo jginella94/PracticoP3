@@ -1,12 +1,10 @@
-﻿using Libreria.LogicaNegocio.Entidades;
+﻿using Libreria.Infraestructura.AccesoDatos.EF.Config;
+using Libreria.LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Libreria.Infraestructura.AccesoDatos.EF
 {
-    public class LibreriaContext: DbContext
+    public class LibreriaContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
 
@@ -15,5 +13,12 @@ namespace Libreria.Infraestructura.AccesoDatos.EF
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=libreriaN3C;Integrated Security=True;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+        }
+
     }
 }

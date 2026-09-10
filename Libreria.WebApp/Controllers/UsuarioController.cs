@@ -1,5 +1,6 @@
-﻿using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
-using Libreria.LogicaNegocio.Entidades;
+﻿using Librearia.LogicaNegocio.Excepciones;
+using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
+using Libreria.LogicaAplicacion.Dtos.Usuarios;
 using Libreria.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,18 +8,18 @@ namespace Libreria.WebApp.Controllers
 {
     public class UsuarioController : Controller
     {
-        private IListarTodos<Usuario> _getall;
-        private IAlta<Usuario> _add;
-        private IBorrar<Usuario> _borrar;
-        private IVer<Usuario> _ver;
-        private IEditar<Usuario> _editar;
+        private IListarTodos<DtoUsuarioListado> _getall;
+        private IAlta<DtoUsuarioAlta> _add;
+        private IBorrar<DtoUsuarioAlta> _borrar;
+        private IVer<DtoUsuarioListado> _ver;
+        private IEditar<DtoUsuarioAlta> _editar;
 
         public UsuarioController(
-            IAlta<Usuario> add,
-            IListarTodos<Usuario> getall,
-            IBorrar<Usuario> borrar,
-            IVer<Usuario> ver,
-            IEditar<Usuario> editar
+            IAlta<DtoUsuarioAlta> add,
+            IListarTodos<DtoUsuarioListado> getall,
+            IBorrar<DtoUsuarioAlta> borrar,
+            IVer<DtoUsuarioListado> ver,
+            IEditar<DtoUsuarioAlta> editar
         )
         {
             _add = add;
@@ -44,14 +45,18 @@ namespace Libreria.WebApp.Controllers
         {
             try
             {
-                _add.Ejecutar(new Usuario(vMUsuario.Nombre, vMUsuario.Mail, vMUsuario.Rol, vMUsuario.Telefono));
+                _add.Ejecutar(new DtoUsuarioAlta(vMUsuario.Nombre, vMUsuario.Mail, vMUsuario.Rol, vMUsuario.Telefono));
                 return RedirectToAction("index");
+            }
+            catch (LogicaNegocioException e)
+            {
+                ViewBag.Mensaje = e.Message;
             }
             catch (Exception e)
             {
                 ViewBag.Mensaje = e.Message;
-                return View(vMUsuario);
             }
+            return View(vMUsuario);
         }
 
 
@@ -104,17 +109,17 @@ namespace Libreria.WebApp.Controllers
 
         public IActionResult Edit(int id)
         {
-            Usuario usuario = _ver.Ejecutar(id);
-            if (usuario == null)
+            DtoUsuarioListado dto = _ver.Ejecutar(id);
+            if (dto == null)
             {
                 return RedirectToAction("index");
             }
             return View(new VMUsuario()
             {
-                Nombre = usuario.Nombre,
-                Mail = usuario.Mail,
-                Rol = usuario.Rol,
-                Telefono = usuario.Telefono
+                Nombre = dto.Nombre,
+                Mail = dto.Mail,
+                Rol = dto.Rol,
+                Telefono = dto.Telefono
             });
         }
 
@@ -125,7 +130,7 @@ namespace Libreria.WebApp.Controllers
 
             try
             {
-                _editar.Ejecutar(id, new Usuario(vMUsuario.Nombre, vMUsuario.Mail, vMUsuario.Rol, vMUsuario.Telefono));
+                _editar.Ejecutar(id, new DtoUsuarioAlta(vMUsuario.Nombre, vMUsuario.Mail, vMUsuario.Rol, vMUsuario.Telefono));
                 return RedirectToAction("Index");
 
             }

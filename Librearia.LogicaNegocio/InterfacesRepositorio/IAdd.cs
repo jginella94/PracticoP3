@@ -2,7 +2,7 @@
 
 namespace Librearia.LogicaNegocio.InterfacesRepositorio
 {
-    public interface IRepositorioAdd<T>
+    public interface IAdd<T>
     {
         void Add(T obj);
     }
