@@ -1,10 +1,10 @@
 ﻿using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
 using Librearia.LogicaNegocio.InterfacesRepositorio;
-using Libreria.LogicaNegocio.Entidades;
+using Libreria.LogicaAplicacion.Dtos.Usuarios;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
 {
-    public class BorrarUsuario : IBorrar<Usuario>
+    public class BorrarUsuario : IBorrar<DtoUsuarioAlta>
     {
         private IRepositorioUsuario _repo;
 

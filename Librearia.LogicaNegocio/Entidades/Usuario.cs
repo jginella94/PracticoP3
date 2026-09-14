@@ -1,4 +1,5 @@
-﻿
+﻿using Librearia.LogicaNegocio.Excepciones;
+using Librearia.LogicaNegocio.Vo;
 using System.Text.RegularExpressions;
 
 namespace Libreria.LogicaNegocio.Entidades
@@ -6,13 +7,13 @@ namespace Libreria.LogicaNegocio.Entidades
     public class Usuario
     {
         public int Id { get; set; }
-        public string Nombre { get; private set; }
+        public VoNombre Nombre { get; private set; }
         public string Mail { get; private set; }
         public string Rol { get; private set; }
         public string Telefono { get; private set; }
 
         private Usuario() { }
-        public Usuario(string nombre, string mail, string rol, string telefono)
+        public Usuario(VoNombre nombre, string mail, string rol, string telefono)
         {
             Nombre = nombre;
             Mail = mail;
@@ -23,9 +24,9 @@ namespace Libreria.LogicaNegocio.Entidades
 
         private void Validar()
         {
-            if (string.IsNullOrEmpty(Nombre))
+            if (Nombre == null)
             {
-                throw new Exception("El nombre esta vacio");
+                throw new NombreInvalidoException("El nombre es inválido.");
             }
             // uso expresiones regulares para la validacion
             if (!Regex.IsMatch(Telefono, @"^(099|095)[0-9]{6}$"))

@@ -1,10 +1,11 @@
 ﻿using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
 using Librearia.LogicaNegocio.InterfacesRepositorio;
+using Libreria.LogicaAplicacion.Dtos.Usuarios;
 using Libreria.LogicaNegocio.Entidades;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
 {
-    public class VerUsuario : IVer<Usuario>
+    public class VerUsuario : IVer<DtoUsuarioListado>
     {
         private IRepositorioUsuario _repo;
 
@@ -13,9 +14,12 @@ namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
             _repo = repo;
         }
 
-        public Usuario Ejecutar(int id)
+        public DtoUsuarioListado Ejecutar(int id)
         {
-            return _repo.GetById(id);
+            // Maper usuario -> usuarioDto
+            Usuario unU = _repo.GetById(id);
+            DtoUsuarioListado dto = new DtoUsuarioListado(unU.Id, unU.Nombre.Value, unU.Mail, unU.Rol, unU.Telefono);
+            return dto;
         }
     }
 }

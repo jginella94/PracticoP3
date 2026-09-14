@@ -2,7 +2,7 @@ using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
 using Librearia.LogicaNegocio.InterfacesRepositorio;
 using Libreria.Infraestructura.AccesoDatos.EF;
 using Libreria.LogicaAplicacion.CasosDeUso.Usuarios;
-using Libreria.LogicaNegocio.Entidades;
+using Libreria.LogicaAplicacion.Dtos.Usuarios;
 
 namespace Libreria.WebApp
 {
@@ -20,20 +20,17 @@ namespace Libreria.WebApp
 
 
             // Inyeccion de dependencia de los casos de uso
-            builder.Services.AddScoped<IAlta<Usuario>, AltaUsuario>();
-            builder.Services.AddScoped<IListarTodos<Usuario>, ListarTodosLosUsuarios>();
-            builder.Services.AddScoped<IBorrar<Usuario>, BorrarUsuario>();
-            builder.Services.AddScoped<IVer<Usuario>, VerUsuario>();
-            builder.Services.AddScoped<IEditar<Usuario>, EditarUsuario>();
+            builder.Services.AddScoped<IAlta<DtoUsuarioAlta>, AltaUsuario>();
+            builder.Services.AddScoped<IListarTodos<DtoUsuarioListado>, ListarTodosLosUsuarios>();
+            builder.Services.AddScoped<IBorrar<DtoUsuarioAlta>, BorrarUsuario>();
+            builder.Services.AddScoped<IVer<DtoUsuarioListado>, VerUsuario>();
+            builder.Services.AddScoped<IEditar<DtoUsuarioAlta>, EditarUsuario>();
+
 
             // Inyeccion de dependencia de la base de datos
             builder.Services.AddDbContext<LibreriaContext>();
 
-
-
             var app = builder.Build();
-
-
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
