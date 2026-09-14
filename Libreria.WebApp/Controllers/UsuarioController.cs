@@ -6,29 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Libreria.WebApp.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController(
+        IListarTodos<DtoUsuarioListado> _getall,
+        IAlta<DtoUsuarioAlta> _add,
+        IBorrar<DtoUsuarioAlta> _borrar,
+        IVer<DtoUsuarioListado> _ver,
+        IEditar<DtoUsuarioAlta> _editar
+        ) : Controller
     {
-        private IListarTodos<DtoUsuarioListado> _getall;
-        private IAlta<DtoUsuarioAlta> _add;
-        private IBorrar<DtoUsuarioAlta> _borrar;
-        private IVer<DtoUsuarioListado> _ver;
-        private IEditar<DtoUsuarioAlta> _editar;
-
-        public UsuarioController(
-            IAlta<DtoUsuarioAlta> add,
-            IListarTodos<DtoUsuarioListado> getall,
-            IBorrar<DtoUsuarioAlta> borrar,
-            IVer<DtoUsuarioListado> ver,
-            IEditar<DtoUsuarioAlta> editar
-        )
-        {
-            _add = add;
-            _getall = getall;
-            _borrar = borrar;
-            _ver = ver;
-            _editar = editar;
-        }
-
 
         public IActionResult Index()
         {

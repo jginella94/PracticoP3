@@ -6,14 +6,8 @@ using Libreria.LogicaNegocio.Entidades;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
 {
-    public class AltaUsuario : IAlta<DtoUsuarioAlta>
+    public class AltaUsuario(IRepositorioUsuario _repo) : IAlta<DtoUsuarioAlta>
     {
-        private IRepositorioUsuario _repo;
-
-        public AltaUsuario(IRepositorioUsuario repo)
-        {
-            _repo = repo;
-        }
 
         public void Ejecutar(DtoUsuarioAlta dtoUsuario)
         {
