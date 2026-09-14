@@ -1,19 +1,12 @@
 ﻿using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
 using Librearia.LogicaNegocio.InterfacesRepositorio;
-using Librearia.LogicaNegocio.Vo;
 using Libreria.LogicaAplicacion.Dtos.Usuarios;
-using Libreria.LogicaNegocio.Entidades;
+using Libreria.LogicaAplicacion.Mapper;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
 {
-    public class EditarUsuario : IEditar<DtoUsuarioAlta>
+    public class EditarUsuario(IRepositorioUsuario _repo) : IEditar<DtoUsuarioAlta>
     {
-        private IRepositorioUsuario _repo;
-
-        public EditarUsuario(IRepositorioUsuario repo)
-        {
-            _repo = repo;
-        }
 
         public void Ejecutar(int id, DtoUsuarioAlta dtoUsuario)
         {
@@ -22,10 +15,7 @@ namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
                 throw new Exception("El usuario no puede ser nulo");
             }
             _repo.GetById(id);
-            // Mapper DtoUsuario -> Usuario
-            Usuario usuario = new Usuario(new VoNombre(dtoUsuario.Nombre), dtoUsuario.Mail, dtoUsuario.Rol, dtoUsuario.Telefono);
-            _repo.Update(id, usuario);
+            _repo.Update(id, UsuarioMapper.DesdeDto(dtoUsuario));
         }
-
     }
 }

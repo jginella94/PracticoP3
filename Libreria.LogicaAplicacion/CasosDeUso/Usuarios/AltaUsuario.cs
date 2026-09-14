@@ -1,7 +1,7 @@
 ﻿using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
 using Librearia.LogicaNegocio.InterfacesRepositorio;
-using Librearia.LogicaNegocio.Vo;
 using Libreria.LogicaAplicacion.Dtos.Usuarios;
+using Libreria.LogicaAplicacion.Mapper;
 using Libreria.LogicaNegocio.Entidades;
 
 namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
@@ -15,8 +15,7 @@ namespace Libreria.LogicaAplicacion.CasosDeUso.Usuarios
             {
                 throw new Exception("Informacion inválida");
             }
-            // Mapper DtoUsuario -> Usuario
-            Usuario usuario = new Usuario(new VoNombre(dtoUsuario.Nombre), dtoUsuario.Mail, dtoUsuario.Rol, dtoUsuario.Telefono);
+            Usuario usuario = UsuarioMapper.DesdeDto(dtoUsuario);
             if (_repo.ExisteUsuario(usuario))
             {
                 throw new Exception("Ya existe el usuario");
