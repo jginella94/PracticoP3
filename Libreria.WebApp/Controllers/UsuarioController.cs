@@ -105,7 +105,8 @@ namespace Libreria.WebApp.Controllers
                 Mail = dto.Mail,
                 Rol = dto.Rol,
                 Telefono = dto.Telefono
-            });
+            }
+            );
         }
 
         [HttpPost]
@@ -117,11 +118,9 @@ namespace Libreria.WebApp.Controllers
             {
                 _editar.Ejecutar(id, new DtoUsuarioAlta(vMUsuario.Nombre, vMUsuario.Mail, vMUsuario.Rol, vMUsuario.Telefono));
                 return RedirectToAction("Index");
-
             }
             catch (Exception e)
             {
-
                 ViewBag.Mensaje = e.Message;
                 return View(vMUsuario);
             }
