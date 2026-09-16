@@ -15,6 +15,8 @@ namespace Libreria.WebApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddSession();
+
             // Inyeccion de dependencia de los repositorios
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
@@ -45,10 +47,12 @@ namespace Libreria.WebApp
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Usuario}/{action=Index}/{id?}")
+                pattern: "{controller=Login}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
