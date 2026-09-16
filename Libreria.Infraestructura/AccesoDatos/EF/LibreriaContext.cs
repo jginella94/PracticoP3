@@ -7,6 +7,8 @@ namespace Libreria.Infraestructura.AccesoDatos.EF
     public class LibreriaContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Autor> Autores { get; set; }
+        public DbSet<Pais> Paises { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,6 +20,8 @@ namespace Libreria.Infraestructura.AccesoDatos.EF
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new AutorConfiguration());
+            modelBuilder.ApplyConfiguration(new PaisConfiguration());
         }
 
     }

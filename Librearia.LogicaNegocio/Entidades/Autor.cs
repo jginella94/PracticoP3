@@ -11,9 +11,9 @@ namespace Libreria.LogicaNegocio.Entidades
         public string Email { get; private set; }
         public int NumeroReferencia { get; private set; }
 
-        public Pais MiPais { get; private set; }
-        public int MiPaisId { get; private set; }
-        public List<Telefono>? MisTelefonos { get; private set; }
-        public List<Publicacion> MisPublicaciones { get; private set; }
+        //public Pais MiPais { get; private set; }
+        //public int MiPaisId { get; private set; }
+        //public List<Telefono>? MisTelefonos { get; private set; }
+        //public List<Publicacion> MisPublicaciones { get; private set; }
     }
 }

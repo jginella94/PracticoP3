@@ -10,9 +10,9 @@ namespace Libreria.LogicaAplicacion.Mapper
         {
             return new Usuario(
                 new VoNombre(dtoUsuario.Nombre),
-                dtoUsuario.Mail,
+                new VoMail(dtoUsuario.Mail),
                 dtoUsuario.Rol,
-                dtoUsuario.Telefono
+                new VoTelefono(dtoUsuario.Telefono)
                 );
         }
 
@@ -21,9 +21,9 @@ namespace Libreria.LogicaAplicacion.Mapper
             return new DtoUsuarioListado(
                 usuario.Id,
                 usuario.Nombre.Value,
-                usuario.Mail,
+                usuario.Mail.Value,
                 usuario.Rol,
-                usuario.Telefono
+                usuario.Telefono.Value
                 );
         }
 
