@@ -1,11 +1,13 @@
 ﻿using Librearia.LogicaNegocio.Excepciones;
 using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
 using Libreria.LogicaAplicacion.Dtos.Usuarios;
+using Libreria.WebApp.Filtros;
 using Libreria.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Libreria.WebApp.Controllers
 {
+    [Admin]
     public class UsuarioController(
         IListarTodos<DtoUsuarioListado> _getall,
         IAlta<DtoUsuarioAlta> _add,
@@ -15,6 +17,7 @@ namespace Libreria.WebApp.Controllers
         ) : Controller
     {
 
+        //[AllowAnonymous]
         public IActionResult Index()
         {
             return View(_getall.Ejecutar());
