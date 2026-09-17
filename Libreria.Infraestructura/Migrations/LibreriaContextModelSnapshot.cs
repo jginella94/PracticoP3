@@ -44,6 +44,9 @@ namespace Libreria.Infraestructura.Migrations
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MiPaisId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -52,6 +55,8 @@ namespace Libreria.Infraestructura.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MiPaisId");
 
                     b.ToTable("Autores");
                 });
@@ -84,6 +89,11 @@ namespace Libreria.Infraestructura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
                     b.Property<string>("Rol")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -91,6 +101,31 @@ namespace Libreria.Infraestructura.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Librearia.LogicaNegocio.Entidades.Admin", b =>
+                {
+                    b.HasBaseType("Libreria.LogicaNegocio.Entidades.Usuario");
+
+                    b.Property<int>("NroFunc")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Admin");
+                });
+
+            modelBuilder.Entity("Libreria.LogicaNegocio.Entidades.Autor", b =>
+                {
+                    b.HasOne("Libreria.LogicaNegocio.Entidades.Pais", "MiPais")
+                        .WithMany()
+                        .HasForeignKey("MiPaisId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("MiPais");
                 });
 
             modelBuilder.Entity("Libreria.LogicaNegocio.Entidades.Usuario", b =>

@@ -16,14 +16,15 @@ namespace Libreria.LogicaAplicacion.Mapper
                 );
         }
 
+        // Aca se usan parametros nominados
         public static DtoUsuarioListado DesdeEntidad(Usuario usuario)
         {
             return new DtoUsuarioListado(
-                usuario.Id,
-                usuario.Nombre.Value,
-                usuario.Mail.Value,
-                usuario.Rol,
-                usuario.Telefono.Value
+                Id: usuario.Id,
+                Nombre: usuario.Nombre.Value,
+                Mail: usuario.Mail.Value,
+                Rol: usuario.Rol,
+                Telefono: usuario.Telefono.Value
                 );
         }
 
