@@ -11,7 +11,7 @@ namespace Libreria.LogicaNegocio.Entidades
         public string Rol { get; private set; }
         public VoTelefono Telefono { get; private set; }
 
-        private Usuario() { }
+        protected Usuario() { }
         public Usuario(VoNombre nombre, VoMail mail, string rol, VoTelefono telefono)
         {
             Nombre = nombre;

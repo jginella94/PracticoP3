@@ -7,7 +7,10 @@ namespace Libreria.Infraestructura.AccesoDatos.EF.Config
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Autor> builder)
         {
-
+            builder.HasOne(a => a.MiPais)
+                   .WithMany()
+                   .HasForeignKey(a => a.MiPaisId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
