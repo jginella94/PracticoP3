@@ -23,6 +23,8 @@ namespace Libreria.Infraestructura.AccesoDatos.EF.Config
             {
                 VoMail.Property(vo => vo.Value).HasColumnName("Mail");
             });
+
         }
+
     }
 }

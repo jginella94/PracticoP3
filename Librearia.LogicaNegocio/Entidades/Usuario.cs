@@ -3,7 +3,7 @@ using Librearia.LogicaNegocio.Vo;
 
 namespace Libreria.LogicaNegocio.Entidades
 {
-    public class Usuario
+    public abstract class Usuario
     {
         public int Id { get; set; }
         public VoNombre Nombre { get; private set; }

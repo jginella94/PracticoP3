@@ -1,4 +1,5 @@
-﻿using Librearia.LogicaNegocio.Vo;
+﻿using Librearia.LogicaNegocio.Entidades;
+using Librearia.LogicaNegocio.Vo;
 using Libreria.LogicaAplicacion.Dtos.Usuarios;
 using Libreria.LogicaNegocio.Entidades;
 
@@ -8,12 +9,20 @@ namespace Libreria.LogicaAplicacion.Mapper
     {
         public static Usuario DesdeDto(DtoUsuarioAlta dtoUsuario)
         {
-            return new Usuario(
-                new VoNombre(dtoUsuario.Nombre),
-                new VoMail(dtoUsuario.Mail),
-                dtoUsuario.Rol,
-                new VoTelefono(dtoUsuario.Telefono)
-                );
+            if (dtoUsuario.Rol == "Admin")
+            {
+                return new Admin(
+                    0,
+                    new VoNombre(dtoUsuario.Nombre),
+                    new VoMail(dtoUsuario.Mail),
+                    dtoUsuario.Rol,
+                    new VoTelefono(dtoUsuario.Telefono)
+                    );
+            }
+            else
+            {
+                throw new ArgumentException("Rol no válido. Debe ser 'Admin'.");
+            }
         }
 
         // Aca se usan parametros nominados

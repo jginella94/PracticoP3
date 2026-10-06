@@ -7,16 +7,23 @@ namespace Libreria.Infraestructura.AccesoDatos.EF
 {
     public class LibreriaContext : DbContext
     {
+
+
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Autor> Autores { get; set; }
         public DbSet<Pais> Paises { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=libreriaN3C;Integrated Security=True;");
+        //}
+
+        public LibreriaContext(DbContextOptions options) : base(options)
         {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=libreriaN3C;Integrated Security=True;");
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

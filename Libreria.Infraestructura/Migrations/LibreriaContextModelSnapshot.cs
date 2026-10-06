@@ -120,7 +120,7 @@ namespace Libreria.Infraestructura.Migrations
             modelBuilder.Entity("Libreria.LogicaNegocio.Entidades.Autor", b =>
                 {
                     b.HasOne("Libreria.LogicaNegocio.Entidades.Pais", "MiPais")
-                        .WithMany()
+                        .WithMany("Autores")
                         .HasForeignKey("MiPaisId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -192,6 +192,11 @@ namespace Libreria.Infraestructura.Migrations
 
                     b.Navigation("Telefono")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Libreria.LogicaNegocio.Entidades.Pais", b =>
+                {
+                    b.Navigation("Autores");
                 });
 #pragma warning restore 612, 618
         }
