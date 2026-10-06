@@ -7,7 +7,7 @@ namespace Libreria.LogicaNegocio.Entidades
         public string Nombre { get; private set; }
         public int CantidadHabitantes { get; private set; }
 
-        // public List<Autor> Autores { get; private set; }
+        public List<Autor> Autores { get; private set; }
 
     }
 }

@@ -23,7 +23,9 @@ namespace Libreria.Infraestructura.AccesoDatos.EF
 
         public IEnumerable<Usuario> GetAll()
         {
-            return _context.Usuarios;
+            return _context.Usuarios
+                .OrderBy(u => u.Nombre.Value)
+                .ToList();
         }
 
         public bool ExisteUsuario(Usuario usuario)
@@ -41,7 +43,8 @@ namespace Libreria.Infraestructura.AccesoDatos.EF
 
         public Usuario GetById(int id)
         {
-            Usuario usuario = _context.Usuarios.Find(id);
+            Usuario usuario = _context.Usuarios
+                        .FirstOrDefault(u => u.Id == id);
             if (usuario == null)
             {
                 throw new Exception($"No se encontro el usuario {id}");

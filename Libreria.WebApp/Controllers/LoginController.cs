@@ -20,11 +20,8 @@ namespace Libreria.WebApp.Controllers
                 HttpContext.Session.SetString("Rol", "admin");
                 return Redirect("/Usuario/Index");
             }
-            else
-            {
-                ViewBag.ErrorMessage = "Nombre de usuario o contraseña incorrectos.";
-                return View("Index");
-            }
+            ViewBag.ErrorMessage = "Nombre de usuario o contraseña incorrectos.";
+            return View("Index");
         }
 
         public IActionResult Logout()

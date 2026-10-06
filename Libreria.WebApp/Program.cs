@@ -3,6 +3,7 @@ using Librearia.LogicaNegocio.InterfacesRepositorio;
 using Libreria.Infraestructura.AccesoDatos.EF;
 using Libreria.LogicaAplicacion.CasosDeUso.Usuarios;
 using Libreria.LogicaAplicacion.Dtos.Usuarios;
+using Microsoft.EntityFrameworkCore;
 
 namespace Libreria.WebApp
 {
@@ -30,7 +31,8 @@ namespace Libreria.WebApp
 
 
             // Inyeccion de dependencia de la base de datos
-            builder.Services.AddDbContext<LibreriaContext>();
+            builder.Services.AddDbContext<LibreriaContext>(
+                option => option.UseSqlServer(builder.Configuration.GetConnectionString("LibreriaDB")));
 
             var app = builder.Build();
 
