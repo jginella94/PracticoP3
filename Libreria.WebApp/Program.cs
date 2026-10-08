@@ -1,5 +1,6 @@
 using Librearia.LogicaNegocio.InterfacesLogicaAplicacion;
 using Librearia.LogicaNegocio.InterfacesRepositorio;
+using Libreria.Infraestructura.AccesoDatos;
 using Libreria.Infraestructura.AccesoDatos.EF;
 using Libreria.LogicaAplicacion.CasosDeUso.Usuarios;
 using Libreria.LogicaAplicacion.Dtos.Usuarios;
@@ -29,6 +30,9 @@ namespace Libreria.WebApp
             builder.Services.AddScoped<IVer<DtoUsuarioListado>, VerUsuario>();
             builder.Services.AddScoped<IEditar<DtoUsuarioAlta>, EditarUsuario>();
 
+            // Inyecto la precarga de datos  
+            builder.Services.AddScoped<SeedData>();
+
 
             // Inyeccion de dependencia de la base de datos
             builder.Services.AddDbContext<LibreriaContext>(
@@ -36,12 +40,25 @@ namespace Libreria.WebApp
 
             var app = builder.Build();
 
+            if (app.Environment.IsDevelopment())
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var seedData = scope.ServiceProvider.GetRequiredService<SeedData>();
+                    // ejecutando el metodo Seed para precargar los datos en la base de datos
+                    seedData.Seed();
+                }
+            }
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
+
+
             }
 
             app.UseHttpsRedirection();
